@@ -1,4 +1,4 @@
-package com.kyn.springbatch_study.hello_world;
+package com.kyn.springbatch_study.d_hello_world_decider;
 
 import com.kyn.springbatch_study.SpringBatchApplication;
 import org.junit.jupiter.api.Test;
@@ -28,18 +28,18 @@ public class Test1 {
     private static final Logger logger = LoggerFactory.getLogger(Test1.class);
 
     @Resource
-    private HelloWorldJobConfiguration helloWorldJobConfiguration;
+    private HelloWorldJobConfigurationDemo6 helloWorldJobConfigurationDemo6;
     /**
      * 任务起动器
      */
     @Autowired
     private JobLauncher jobLauncher;
     /**
-     * 批扣测试
+     * 测试1
      */
     @Test
     public void test1(){
-        Job job = (Job)helloWorldJobConfiguration.buildHelloWorldJob();
+        Job job = (Job)helloWorldJobConfigurationDemo6.buildHelloWorldDeciderJob6();
         try {
             /* 运行Job */
             JobExecution result = jobLauncher.run(job, new JobParametersBuilder().toJobParameters());

@@ -1,9 +1,8 @@
-package com.kyn.springbatch_study.hello_world;
+package com.kyn.springbatch_study.a_hello_world;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.StepContribution;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
@@ -17,11 +16,12 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author Kangyanan
  * @Description: SpringBatch Hello World 入门程序
+ *  创建Job包含一个Step
+ *  测试类 com.kyn.springbatch_study.hello_world.Test1.test1()
  * @date 2021/2/24
  */
 @Configuration
-@EnableBatchProcessing
-public class HelloWorldJobConfiguration {
+public class HelloWorldJobConfigurationDemo1 {
     /** 创建Job工厂对象*/
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
