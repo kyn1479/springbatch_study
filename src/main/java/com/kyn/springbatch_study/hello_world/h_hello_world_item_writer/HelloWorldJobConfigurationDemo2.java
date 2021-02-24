@@ -32,7 +32,7 @@ import javax.sql.DataSource;
  * @date 2021/2/24
  */
 @Configuration
-public class HelloWorldJobConfigurationDemo13 {
+public class HelloWorldJobConfigurationDemo2 {
     /** 创建Job工厂对象*/
     @Autowired
     private JobBuilderFactory jobBuilderFactory;

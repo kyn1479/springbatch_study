@@ -28,7 +28,7 @@ public class Test1 {
     private static final Logger logger = LoggerFactory.getLogger(Test1.class);
 
     @Resource
-    private HelloWorldJobConfigurationDemo6 helloWorldJobConfigurationDemo6;
+    private HelloWorldJobConfigurationDemo1 helloWorldJobConfigurationDemo1;
     /**
      * 任务起动器
      */
@@ -39,7 +39,7 @@ public class Test1 {
      */
     @Test
     public void test1(){
-        Job job = (Job)helloWorldJobConfigurationDemo6.buildHelloWorldDeciderJob6();
+        Job job = (Job) helloWorldJobConfigurationDemo1.buildHelloWorldDeciderJob6();
         try {
             /* 运行Job */
             JobExecution result = jobLauncher.run(job, new JobParametersBuilder().toJobParameters());

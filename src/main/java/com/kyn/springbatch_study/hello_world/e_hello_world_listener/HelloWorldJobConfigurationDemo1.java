@@ -30,7 +30,7 @@ import java.util.List;
  * @date 2021/2/24 parameter
  */
 @Configuration
-public class HelloWorldJobConfigurationDemo7 {
+public class HelloWorldJobConfigurationDemo1 {
     /** 创建Job工厂对象*/
     @Autowired
     private JobBuilderFactory jobBuilderFactory;

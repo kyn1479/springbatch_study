@@ -28,13 +28,13 @@ public class Test1 {
     private static final Logger logger = LoggerFactory.getLogger(Test1.class);
 
     @Resource
-    private HelloWorldJobConfigurationDemo9 helloWorldJobConfigurationDem9;
+    private HelloWorldJobConfigurationDemo1 helloWorldJobConfigurationDem1;
 
     @Resource
-    private HelloWorldJobConfigurationDemo10 helloWorldJobConfigurationDem10;
+    private HelloWorldJobConfigurationDemo2 helloWorldJobConfigurationDem2;
 
     @Resource
-    private HelloWorldJobConfigurationDemo11 helloWorldJobConfigurationDem11;
+    private HelloWorldJobConfigurationDemo3 helloWorldJobConfigurationDem3;
     /**
      * 任务起动器
      */
@@ -45,7 +45,7 @@ public class Test1 {
      */
     @Test
     public void test1(){
-        Job job = (Job)helloWorldJobConfigurationDem9.buildHelloWorldItemReaderJob9();
+        Job job = (Job)helloWorldJobConfigurationDem1.buildHelloWorldItemReaderJob9();
         try {
             /* 运行Job */
             JobExecution result = jobLauncher.run(job, new JobParametersBuilder().toJobParameters());
@@ -67,7 +67,7 @@ public class Test1 {
      */
     @Test
     public void test2(){
-        Job job = (Job)helloWorldJobConfigurationDem10.buildHelloWorldItemReaderJob10();
+        Job job = (Job)helloWorldJobConfigurationDem2.buildHelloWorldItemReaderJob10();
         try {
             /* 运行Job */
             JobExecution result = jobLauncher.run(job, new JobParametersBuilder().toJobParameters());
@@ -89,7 +89,7 @@ public class Test1 {
      */
     @Test
     public void test3(){
-        Job job = (Job)helloWorldJobConfigurationDem11.buildHelloWorldItemReaderJob11();
+        Job job = (Job)helloWorldJobConfigurationDem3.buildHelloWorldItemReaderJob11();
         try {
             /* 运行Job */
             JobExecution result = jobLauncher.run(job, new JobParametersBuilder().toJobParameters());

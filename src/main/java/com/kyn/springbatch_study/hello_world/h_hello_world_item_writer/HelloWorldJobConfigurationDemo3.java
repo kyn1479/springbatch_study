@@ -1,18 +1,21 @@
-package com.kyn.springbatch_study.hello_world.g_hello_world_item_reader;
+package com.kyn.springbatch_study.hello_world.h_hello_world_item_writer;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
-import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.database.JdbcPagingItemReader;
 import org.springframework.batch.item.database.Order;
 import org.springframework.batch.item.database.support.MySqlPagingQueryProvider;
+import org.springframework.batch.item.file.FlatFileItemWriter;
+import org.springframework.batch.item.file.transform.LineAggregator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.jdbc.core.RowMapper;
 
 import javax.sql.DataSource;
@@ -21,18 +24,17 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
  * @author Kangyanan
  * @Description: SpringBatch Hello World 入门程序
- * 数据的输入：
- *   ItemReader的使用：
- *   从数据库中读取数据：JdbcPagingItemReader
- *   创建：DbJdbcWriter
- *  测试类 com.kyn.springbatch_study.hello_world.g_hello_world_item_reader.Test.test2()
+ *   ItemWriter数据输出：
+ *      数据输出到普通文件：从数据库表中读取然后写入文件
+ *  测试类 com.kyn.springbatch_study.hello_world.h_hello_world_item_writer.Test.test3()
  * @date 2021/2/24
  */
 @Configuration
-public class HelloWorldJobConfigurationDemo10 {
+public class HelloWorldJobConfigurationDemo3 {
     /** 创建Job工厂对象*/
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
@@ -41,33 +43,72 @@ public class HelloWorldJobConfigurationDemo10 {
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
 
+
     /** 注入数据源*/
     @Autowired
     private DataSource dataSource;
 
-    /** 注入ItemWriter*/
-    @Autowired
-    @Qualifier("dbJdbcWriter")
-    private ItemWriter<Boy> dbJdbcWriter;
-
     @Bean
-    public Job buildHelloWorldItemReaderJob10(){
-        return jobBuilderFactory.get("helloWorldItemReaderJob10")
-                .start(jdbcPagingItemReaderJob10Step1())
+    public Job buildHelloWorldItemWriterJob14(){
+        return jobBuilderFactory.get("helloWorldItemWriterJob14")
+                .start(itemWriterFileJob14Step1())
                 .build();
     }
 
     /**
-     * 使用chunk实现 Step  并监听
+     * 使用chunk实现 Step
      * @return
      */
     @Bean
-    public Step jdbcPagingItemReaderJob10Step1() {
-        return stepBuilderFactory.get("jdbcPagingItemReaderJob10Step1")
+    public Step itemWriterFileJob14Step1() {
+        return stepBuilderFactory.get("itemWriterFileJob14Step1")
                 .<Boy, Boy>chunk(3)  // read process write
-                .reader(dbJdbcReader())
-                .writer(dbJdbcWriter)
+                .reader(dbJdbcWriterRead())
+                .writer(itemWriterFile())
                 .build();
+    }
+
+    /**
+     * 写入文件
+     * @return
+     */
+    @Bean
+    @StepScope
+    public FlatFileItemWriter<Boy> itemWriterFile() {
+        //把对象转换为字符串输出到文件
+        FlatFileItemWriter<Boy> writer=new FlatFileItemWriter<>();
+        String path="d:\\boy.txt";
+        writer.setResource(new FileSystemResource(path));
+        //Json格式
+        writer.setLineAggregator(new LineAggregator<Boy>() {
+            ObjectMapper mapper=new ObjectMapper();
+            @Override
+            public String aggregate(Boy boy) {
+                String str=null;
+                try {
+                    str=mapper.writeValueAsString(boy);
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
+                return str;
+            }
+        });
+        //指定字符串格式
+//        writer.setLineAggregator(new LineAggregator<Boy>() {
+//            ObjectMapper mapper=new ObjectMapper();
+//            @Override
+//            public String aggregate(Boy boy) {
+//                StringBuilder sb=new StringBuilder();
+//                try {
+//                    sb.append(boy.getId()).append("|").append(boy.getName()).append("|").append(boy.getSex());
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                return sb.toString();
+//            }
+//        });
+
+        return writer;
     }
 
     /**
@@ -76,7 +117,7 @@ public class HelloWorldJobConfigurationDemo10 {
      */
     @Bean
     @StepScope
-    public JdbcPagingItemReader<Boy> dbJdbcReader() {
+    public JdbcPagingItemReader<Boy> dbJdbcWriterRead() {
         JdbcPagingItemReader<Boy> reader=new JdbcPagingItemReader<>();
         reader.setDataSource(dataSource);
         reader.setFetchSize(3);
