@@ -25,7 +25,7 @@ import java.util.Map;
  * @date 2021/2/24 parameter
  */
 @Configuration
-public class HelloWorldJobConfigurationDemo1 {
+public class HelloWorldParamterJobConfigurationDemo1 {
     /** 创建Job工厂对象*/
     @Autowired
     private JobBuilderFactory jobBuilderFactory;

@@ -22,7 +22,7 @@ import java.util.List;
  * @date 2021/2/24
  */
 @Configuration
-public class HelloWorldJobConfigurationDemo1 {
+public class HelloWorldItemReaderJobConfigurationDemo1 {
     /** 创建Job工厂对象*/
     @Autowired
     private JobBuilderFactory jobBuilderFactory;

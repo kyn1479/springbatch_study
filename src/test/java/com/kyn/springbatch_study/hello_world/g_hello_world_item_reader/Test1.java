@@ -28,13 +28,13 @@ public class Test1 {
     private static final Logger logger = LoggerFactory.getLogger(Test1.class);
 
     @Resource
-    private HelloWorldJobConfigurationDemo1 helloWorldJobConfigurationDem1;
+    private HelloWorldItemReaderJobConfigurationDemo1 helloWorldJobConfigurationDem1;
 
     @Resource
-    private HelloWorldJobConfigurationDemo2 helloWorldJobConfigurationDem2;
+    private HelloWorldItemReaderJobConfigurationDemo2 helloWorldJobConfigurationDem2;
 
     @Resource
-    private HelloWorldJobConfigurationDemo3 helloWorldJobConfigurationDem3;
+    private HelloWorldItemReaderJobConfigurationDemo3 helloWorldJobConfigurationDem3;
     /**
      * 任务起动器
      */

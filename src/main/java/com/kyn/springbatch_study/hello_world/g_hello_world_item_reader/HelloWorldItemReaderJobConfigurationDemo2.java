@@ -32,7 +32,7 @@ import java.util.Map;
  * @date 2021/2/24
  */
 @Configuration
-public class HelloWorldJobConfigurationDemo2 {
+public class HelloWorldItemReaderJobConfigurationDemo2 {
     /** 创建Job工厂对象*/
     @Autowired
     private JobBuilderFactory jobBuilderFactory;

@@ -28,7 +28,7 @@ public class Test1 {
     private static final Logger logger = LoggerFactory.getLogger(Test1.class);
 
     @Resource
-    private HelloWorldJobConfigurationDemo1 helloWorldJobConfigurationDem;
+    private HelloWorldParamterJobConfigurationDemo1 helloWorldJobConfigurationDem;
     /**
      * 任务起动器
      */

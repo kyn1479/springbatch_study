@@ -25,7 +25,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2021/2/24
  */
 @Configuration
-public class HelloWorldJobConfigurationDemo1 {
+public class HelloWorldFlowJobConfigurationDemo1 {
     /** 创建Job工厂对象*/
     @Autowired
     private JobBuilderFactory jobBuilderFactory;
