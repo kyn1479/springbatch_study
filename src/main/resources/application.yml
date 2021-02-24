@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: spring_batch_study
+  ## 数据库配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/springbatch_study?serverTimezone=UTC&useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=utf-8
+    username: root
+    password: 123qwe
+    schema: classpath:/org/springframework/batch/core/schema-mysql.sql
+  # 初始化batch需要的表
+  batch:
+    initialize-schema: always
+    # 关闭项目启动时自动执行任务
+    job:
+      enabled: false
+
+
+
+
