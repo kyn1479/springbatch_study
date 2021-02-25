@@ -1,5 +1,6 @@
 package com.kyn.springbatch_study.hello_world.g_hello_world_item_reader;
 
+import com.kyn.springbatch_study.hello_world.g_hello_world_item_reader.reader.MyRead;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;

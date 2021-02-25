@@ -2,6 +2,7 @@ package com.kyn.springbatch_study.hello_world.h_hello_world_item_writer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kyn.springbatch_study.hello_world.h_hello_world_item_writer.entity.Boy;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;

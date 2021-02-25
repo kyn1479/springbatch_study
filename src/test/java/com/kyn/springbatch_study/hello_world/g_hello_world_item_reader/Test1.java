@@ -35,6 +35,12 @@ public class Test1 {
 
     @Resource
     private HelloWorldItemReaderJobConfigurationDemo3 helloWorldJobConfigurationDem3;
+    @Resource
+    private FlatFileReadAndWrteConfig flatFileReadAndWrteConfig;
+
+    @Resource
+    private FlatFileReadAndDbWrteConfig flatFileReadAndDbWrteConfig;
+
     /**
      * 任务起动器
      */
@@ -105,4 +111,43 @@ public class Test1 {
             logger.error("Job执行系统异常", e);
         }
     }
+
+    @Test
+    public void test4(){
+        Job job = (Job)flatFileReadAndWrteConfig.buildFlatFileReadAndWrteConfig();
+        try {
+            /* 运行Job */
+            JobExecution result = jobLauncher.run(job, new JobParametersBuilder().toJobParameters());
+            /* 处理结束，控制台打印处理结果 */
+            logger.info(result.toString());
+            String status = result.getStatus().toString();
+            if (status.equals("COMPLETED")) {
+                logger.info("JOB执行成功！");
+            } else {
+                logger.info("JOB执行失败！");
+            }
+        } catch (Exception e) {
+            logger.error("Job执行系统异常", e);
+        }
+    }
+    @Test
+    public void test5(){
+        Job job = (Job)flatFileReadAndDbWrteConfig.buildFlatFileReadAndDbWrteConfig();
+        try {
+            /* 运行Job */
+            JobExecution result = jobLauncher.run(job, new JobParametersBuilder().toJobParameters());
+            /* 处理结束，控制台打印处理结果 */
+            logger.info(result.toString());
+            String status = result.getStatus().toString();
+            if (status.equals("COMPLETED")) {
+                logger.info("JOB执行成功！");
+            } else {
+                logger.info("JOB执行失败！");
+            }
+        } catch (Exception e) {
+            logger.error("Job执行系统异常", e);
+        }
+    }
+
+
 }
