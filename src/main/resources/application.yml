@@ -8,6 +8,15 @@ spring:
     username: root
     password: 123qwe
     schema: classpath:/org/springframework/batch/core/schema-mysql.sql
+  #Jpa 配置
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      hibernate.format_sql: false
+    open-in-view: true
   # 初始化batch需要的表
   batch:
     initialize-schema: always

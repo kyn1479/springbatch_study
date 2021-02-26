@@ -1,6 +1,7 @@
 package com.kyn.springbatch_study.hello_world.g_hello_world_item_reader;
 
 import com.kyn.springbatch_study.hello_world.g_hello_world_item_reader.entity.WeatherEntity;
+import com.kyn.springbatch_study.hello_world.g_hello_world_item_reader.listener.MySkipListener;
 import com.kyn.springbatch_study.hello_world.g_hello_world_item_reader.reader.ToFileReader;
 import com.kyn.springbatch_study.hello_world.g_hello_world_item_reader.writer.ToDbWriter;
 import org.springframework.batch.core.Job;
@@ -18,6 +19,7 @@ import org.springframework.context.annotation.Import;
 /**
  * @author Kangyanan
  * @Description: 从文件读取并写入数据表
+ *    定义：MySkipListener
  * @date 2021/2/25
  * com.kyn.springbatch_study.hello_world.g_hello_world_item_reader.Test.test5()
  */
@@ -39,6 +41,9 @@ public class FlatFileReadAndDbWrteConfig {
     @Qualifier("jdbcBatchWriter")
     private ItemWriter<WeatherEntity> writer;
 
+    @Autowired
+    private MySkipListener mySkipListener;
+
     @Bean
     public Job buildFlatFileReadAndDbWrteConfig(){
         return jobBuilderFactory.get("BuildFlatFileReadAndDbWrteConfig")
@@ -52,6 +57,10 @@ public class FlatFileReadAndDbWrteConfig {
                 .<WeatherEntity, WeatherEntity>chunk(1000)
                 .reader(reader)
                 .writer(writer)
+                .faultTolerant()
+                .skip(Exception.class)
+                .skipLimit(10)
+                .listener(mySkipListener)
                 .build();
     }
 
