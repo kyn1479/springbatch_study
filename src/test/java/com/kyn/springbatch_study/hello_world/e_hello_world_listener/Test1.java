@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 
 /**
  * @author Kangyanan
- * @Description:
+ * @Description: SpringBatch 中各种Listener的使用
  * @date 2021/2/24
  */
 @RunWith(SpringJUnit4ClassRunner.class)
