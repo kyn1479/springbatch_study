@@ -37,8 +37,6 @@ public class HelloWorldJobConfigurationDemo1 {
     @Bean
     public Job buildHelloWorldJob(){
         return jobBuilderFactory.get("helloWorldJob")
-                //用于启动下一个实例JobInstance
-                //参考文档：https://docs.spring.io/spring-batch/docs/current/reference/html/index-single.html#JobParametersIncrementer
                 .incrementer(new RunIdIncrementer())
                 .start(helloWorldstep())
                 .build();

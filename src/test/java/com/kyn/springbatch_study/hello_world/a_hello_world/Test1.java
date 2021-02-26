@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.annotation.Resource;
+import java.util.Calendar;
 
 /**
  * @author Kangyanan
@@ -46,7 +48,11 @@ public class Test1 {
         Job job = (Job)helloWorldJobConfigurationDemo1.buildHelloWorldJob();
         try {
             /* 运行Job */
-            JobExecution result = jobLauncher.run(job, new JobParametersBuilder().toJobParameters());
+            JobParameters jobParameters = new JobParametersBuilder()
+                    .addDate("timestamp", Calendar.getInstance().getTime())
+                    .toJobParameters();
+
+            JobExecution result = jobLauncher.run(job, jobParameters);
             /* 处理结束，控制台打印处理结果 */
             logger.info(result.toString());
             String status = result.getStatus().toString();
